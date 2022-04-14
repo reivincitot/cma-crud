@@ -21,35 +21,53 @@ class CmA:
         
         #Creacion de las casillas para el ingreso de datos en el marco flbl1
         Label(self.flbl1, text="Ruc/Dni:").grid(row=0, column=0)
-        Entry(self.flbl1,).grid(row=0, column=1)
+        Entry(self.flbl1).grid(row=0, column=1)
         Label(self.flbl1, text="Nombre:").grid(row=1, column=0)
-        Entry(self.flbl1,).grid(row=1, column=1)
+        Entry(self.flbl1).grid(row=1, column=1)
         Label(self.flbl1, text="Provincia:").grid(row=2, column=0)
-        Entry(self.flbl1,).grid(row=2, column=1)
+        Entry(self.flbl1).grid(row=2, column=1)
         Label(self.flbl1, text="Direccion:").grid(row=0, column=3)
-        Entry(self.flbl1,).grid(row=0, column=4)
+        Entry(self.flbl1).grid(row=0, column=4)
         Label(self.flbl1, text="Telefono:").grid(row=1, column=3)
-        Entry(self.flbl1,).grid(row=1, column=4)
+        Entry(self.flbl1).grid(row=1, column=4)
         Label(self.flbl1, text="Correo:").grid(row=2, column=3)
-        Entry(self.flbl1,).grid(row=2, column=4)
+        Entry(self.flbl1).grid(row=2, column=4)
 
         #creacion de los botones para el marco flbl1
-        Button(self.flbl1, text="Agregar",padx=10,pady=2).grid(row=3, column=0)
-        Button(self.flbl1, text="Modificar",padx=10,pady=2).grid(row=3, column=1)
-        Button(self.flbl1, text="Eliminar",padx=10,pady=2).grid(row=3, column=2)
-        Button(self.flbl1, text="Limpiar",padx=10,pady=2).grid(row=3, column=3)
-
-
-
+        ttk.Button(self.flbl1, text="Agregar").grid(row=3, column=0)
+        ttk.Button(self.flbl1, text="Modificar").grid(row=3, column=1)
+        ttk.Button(self.flbl1, text="Eliminar").grid(row=3, column=2)
+        ttk.Button(self.flbl1, text="Limpiar").grid(row=3, column=3)
 
         #creacion de las casillas la busqueda de datos en el marco flbl2
         Label(self.flbl2, text="Buscar:").grid(row=0, column=0)
         Entry(self.flbl2,).grid(row=0, column=1)
 
         #creacion de boton para buscar datos en el marco flbl2
-        Button(self.flbl2, text="Buscar").grid(row=0, column=2)
-        
+        ttk.Button(self.flbl2, text="Buscar").grid(row=0, column=3, sticky="W")
 
+
+    def ConsultaClientes(self,query):
+        #Creacion de la conexion a la base de datos
+        try:
+            conn = mariadb.connect(user="root", password="", host="localhost", database="cma")
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM clientes")
+            resultado = cursor.fetchall()
+            conn.close()
+            return resultado        
+        
+        except mariadb.Error as error:
+           print("Error: {}".format(error))
+        cur=conn.cursor()
+        cur.execute(query)
+        return cur
+    
+    def MostrarDatos(self):
+        #Creacion de la consulta para mostrar los datos en el marco flbl3
+        cur = self.ConsultaClientes("SELECT `ruc_dni``nombre``ciudad``direccion``telefono``e-mail` FROM `customers`")
+        for (ruc_dni,nombre,ciudad,direccion,telefono,email) in cur:
+            print(ruc_dni,nombre,ciudad,direccion,telefono,email)
 
 
 
