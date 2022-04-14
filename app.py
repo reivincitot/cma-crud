@@ -47,28 +47,27 @@ class CmA:
         ttk.Button(self.flbl2, text="Buscar").grid(row=0, column=3, sticky="W")
 
 
-    def ConsultaClientes(self,query):
-        #Creacion de la conexion a la base de datos
+        #creacion de la lista de clientes en el marco flbl3
+    def ConsultaClientes(self, query):
         try:
-            conn = mariadb.connect(
-                user="root",
-                password="",
-                host="localhost",
-                database="cma"
-                )
-              
-        
-        except mariadb.Error as error:
-           print("Error: {}".format(error))
+            conn=mariadb.connect(
+            user='root', 
+            password='', 
+            database='cma', 
+            host='localhost'
+            )
+        except mariadb.Error as e:
+            print("Error al conectarse a la base de datos",e)
         cur=conn.cursor()
         cur.execute(query)
         return cur
-    
     def MostrarDatos(self):
-        #Creacion de la consulta para mostrar los datos en el marco flbl3
-        cur = self.ConsultaClientes("SELECT `ruc_dni``nombre``ciudad``direccion``telefono``email` FROM `customers`")
-        for(ruc_dni,nombre,ciudad,direccion,telefono,email) in cur:
+        cur = self.ConsultaClientes("SELECT `ruc_dni`,`nombre`,`ciudad`,`direccion`,`telefono`,`email` FROM `customers`")
+        for (ruc_dni,nombre,ciudad,direccion,telefono,email) in cur:
             print(ruc_dni,nombre,ciudad,direccion,telefono,email)
+
+
+
 
 
 
