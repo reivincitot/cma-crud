@@ -24,7 +24,7 @@ class CmA:
         Entry(self.flbl1).grid(row=0, column=1)
         Label(self.flbl1, text="Nombre:").grid(row=1, column=0)
         Entry(self.flbl1).grid(row=1, column=1)
-        Label(self.flbl1, text="Provincia:").grid(row=2, column=0)
+        Label(self.flbl1, text="Ciudad:").grid(row=2, column=0)
         Entry(self.flbl1).grid(row=2, column=1)
         Label(self.flbl1, text="Direccion:").grid(row=0, column=3)
         Entry(self.flbl1).grid(row=0, column=4)
@@ -37,17 +37,32 @@ class CmA:
         ttk.Button(self.flbl1, text="Agregar").grid(row=3, column=0)
         ttk.Button(self.flbl1, text="Modificar").grid(row=3, column=1)
         ttk.Button(self.flbl1, text="Eliminar").grid(row=3, column=2)
-        ttk.Button(self.flbl1, text="Limpiar").grid(row=3, column=3)
+        #ttk.Button(self.flbl1, text="Limpiar").grid(row=3, column=3)
 
         #creacion de las casillas la busqueda de datos en el marco flbl2
         Label(self.flbl2, text="Buscar:").grid(row=0, column=0)
         Entry(self.flbl2,).grid(row=0, column=1)
 
         #creacion de boton para buscar datos en el marco flbl2
-        ttk.Button(self.flbl2, text="Buscar").grid(row=0, column=3, sticky="W")
+        ttk.Button(self.flbl2, text="Buscar").grid(row=0, column=3)
+
+        #treeview para mostrar los datos en el marco flbl3
+        self.tabla=ttk.Treeview(self.flbl3, columns=("#0","#1","#2","#3","#4","#5"))
+        self.tabla.grid(row=0, column=0, sticky="nsew")
+        self.tabla.heading("#0", text="Ruc/Dni", anchor="center")
+        self.tabla.heading("#1", text="Nombre", anchor="center")
+        self.tabla.heading("#2", text="Ciudad", anchor="center")
+        self.tabla.heading("#3", text="Direccion", anchor="center")
+        self.tabla.heading("#4", text="Telefono",anchor="center")
+        self.tabla.heading("#5", text="Correo", anchor="center")
 
 
-        #creacion de la lista de clientes en el marco flbl3
+
+
+
+
+
+        #conexion a la base de datos de cma
     def ConsultaClientes(self, query):
         try:
             conn=mariadb.connect(
