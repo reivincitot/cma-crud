@@ -1,0 +1,3 @@
+Este programa creado usando como guia los videos del youtuber Programador novato, comparto el link al listado de videos que me ayudaron a crear este programa
+This app was created using as a guide the series of videos left by the youtuber Programador novato, Below i leave the link to the series of videos where he creates the base of this program
+https://www.youtube.com/watch?v=24bmcoXzCwA&list=PLCTD_CpMeEKQBfbGkWHmc2TlMdOlWjla7

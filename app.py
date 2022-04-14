@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk as ttk
-from tkinter import messagebox
 import mariadb
 
 class CmA:
@@ -34,7 +33,7 @@ class CmA:
         Entry(self.flbl1).grid(row=2, column=4)
 
         #creacion de los botones para el marco flbl1
-        ttk.Button(self.flbl1, text="Agregar").grid(row=3, column=0)
+        ttk.Button(self.flbl1, text="Agregar", command= self.MostrarDatos).grid(row=3, column=0)
         ttk.Button(self.flbl1, text="Modificar").grid(row=3, column=1)
         ttk.Button(self.flbl1, text="Eliminar").grid(row=3, column=2)
         #ttk.Button(self.flbl1, text="Limpiar").grid(row=3, column=3)
@@ -48,18 +47,13 @@ class CmA:
 
         #treeview para mostrar los datos en el marco flbl3
         self.tabla=ttk.Treeview(self.flbl3, columns=("#0","#1","#2","#3","#4","#5"))
-        self.tabla.grid(row=0, column=0, sticky="nsew")
+        self.tabla.grid(row=0, column=0,)
         self.tabla.heading("#0", text="Ruc/Dni", anchor="center")
         self.tabla.heading("#1", text="Nombre", anchor="center")
         self.tabla.heading("#2", text="Ciudad", anchor="center")
         self.tabla.heading("#3", text="Direccion", anchor="center")
         self.tabla.heading("#4", text="Telefono",anchor="center")
         self.tabla.heading("#5", text="Correo", anchor="center")
-
-
-
-
-
 
 
         #conexion a la base de datos de cma
@@ -77,14 +71,12 @@ class CmA:
         cur.execute(query)
         return cur
     def MostrarDatos(self):
+        registros = self.tabla.get_children()
+        for registro in registros:
+            self.tabla.delete(registro)
         cur = self.ConsultaClientes("SELECT `ruc_dni`,`nombre`,`ciudad`,`direccion`,`telefono`,`email` FROM `customers`")
         for (ruc_dni,nombre,ciudad,direccion,telefono,email) in cur:
-            print(ruc_dni,nombre,ciudad,direccion,telefono,email)
-
-
-
-
-
+           self.tabla.insert("",0,text=ruc_dni,values=(nombre,ciudad,direccion,telefono,email))
 
 
 if __name__ == '__main__':
