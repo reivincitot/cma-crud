@@ -50,12 +50,13 @@ class CmA:
     def ConsultaClientes(self,query):
         #Creacion de la conexion a la base de datos
         try:
-            conn = mariadb.connect(user="root", password="", host="localhost", database="cma")
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM clientes")
-            resultado = cursor.fetchall()
-            conn.close()
-            return resultado        
+            conn = mariadb.connect(
+                user="root",
+                password="",
+                host="localhost",
+                database="cma"
+                )
+              
         
         except mariadb.Error as error:
            print("Error: {}".format(error))
@@ -65,8 +66,8 @@ class CmA:
     
     def MostrarDatos(self):
         #Creacion de la consulta para mostrar los datos en el marco flbl3
-        cur = self.ConsultaClientes("SELECT `ruc_dni``nombre``ciudad``direccion``telefono``e-mail` FROM `customers`")
-        for (ruc_dni,nombre,ciudad,direccion,telefono,email) in cur:
+        cur = self.ConsultaClientes("SELECT `ruc_dni``nombre``ciudad``direccion``telefono``email` FROM `customers`")
+        for(ruc_dni,nombre,ciudad,direccion,telefono,email) in cur:
             print(ruc_dni,nombre,ciudad,direccion,telefono,email)
 
 
@@ -75,4 +76,5 @@ class CmA:
 if __name__ == '__main__':
     ventana=Tk()
     app=CmA(ventana)
+    app.MostrarDatos()
     ventana.mainloop()
