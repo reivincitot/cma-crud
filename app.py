@@ -34,10 +34,10 @@ class CmA:
         Entry(self.flbl1,).grid(row=2, column=4)
 
         #creacion de los botones para el marco flbl1
-        Button(self.flbl1, text="Agregar",padx=5,pady=2).grid(row=3, column=0)
-        Button(self.flbl1, text="Modificar",padx=5,pady=2).grid(row=3, column=1)
-        Button(self.flbl1, text="Eliminar",padx=5,pady=2).grid(row=3, column=2)
-        Button(self.flbl1, text="Limpiar",padx=5,pady=2).grid(row=3, column=3)
+        Button(self.flbl1, text="Agregar",padx=10,pady=2).grid(row=3, column=0)
+        Button(self.flbl1, text="Modificar",padx=10,pady=2).grid(row=3, column=1)
+        Button(self.flbl1, text="Eliminar",padx=10,pady=2).grid(row=3, column=2)
+        Button(self.flbl1, text="Limpiar",padx=10,pady=2).grid(row=3, column=3)
 
 
 
